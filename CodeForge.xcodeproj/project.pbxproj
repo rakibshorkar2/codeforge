@@ -34,6 +34,15 @@
 		6B000000000000000000001D /* ImportProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A000000000000000000001D; };
 		6B000000000000000000001E /* WorkspaceFileServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A000000000000000000001E; };
 		6B000000000000000000001F /* ProjectTemplateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A000000000000000000001F; };
+		6B0000000000000000000020 /* SyntaxHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000020; };
+		6B0000000000000000000021 /* EditorTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000021; };
+		6B0000000000000000000022 /* DiffModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000022; };
+		6B0000000000000000000023 /* CodeEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000023; };
+		6B0000000000000000000024 /* ProjectFileTreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000024; };
+		6B0000000000000000000025 /* DiffView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000025; };
+		6B0000000000000000000026 /* SyntaxHighlighterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000026; };
+		6B0000000000000000000027 /* FileTabManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000027; };
+		6B0000000000000000000028 /* DiffModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000028; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +87,15 @@
 		6A000000000000000000001D /* ImportProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportProjectView.swift; sourceTree = "<group>"; };
 		6A000000000000000000001E /* WorkspaceFileServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceFileServiceTests.swift; sourceTree = "<group>"; };
 		6A000000000000000000001F /* ProjectTemplateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTemplateTests.swift; sourceTree = "<group>"; };
+		6A0000000000000000000020 /* SyntaxHighlighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxHighlighter.swift; sourceTree = "<group>"; };
+		6A0000000000000000000021 /* EditorTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorTab.swift; sourceTree = "<group>"; };
+		6A0000000000000000000022 /* DiffModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffModel.swift; sourceTree = "<group>"; };
+		6A0000000000000000000023 /* CodeEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorView.swift; sourceTree = "<group>"; };
+		6A0000000000000000000024 /* ProjectFileTreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFileTreeView.swift; sourceTree = "<group>"; };
+		6A0000000000000000000025 /* DiffView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffView.swift; sourceTree = "<group>"; };
+		6A0000000000000000000026 /* SyntaxHighlighterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxHighlighterTests.swift; sourceTree = "<group>"; };
+		6A0000000000000000000027 /* FileTabManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTabManagerTests.swift; sourceTree = "<group>"; };
+		6A0000000000000000000028 /* DiffModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +164,8 @@
 				6A0000000000000000000003 /* AppError.swift */,
 				6A0000000000000000000004 /* Tab.swift */,
 				6A0000000000000000000005 /* Project.swift */,
+				6A0000000000000000000021 /* EditorTab.swift */,
+				6A0000000000000000000022 /* DiffModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -164,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				6A000000000000000000001A /* ProjectTemplate.swift */,
+				6A0000000000000000000020 /* SyntaxHighlighter.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -210,6 +231,9 @@
 			isa = PBXGroup;
 			children = (
 				6A000000000000000000000B /* FilesView.swift */,
+				6A0000000000000000000023 /* CodeEditorView.swift */,
+				6A0000000000000000000024 /* ProjectFileTreeView.swift */,
+				6A0000000000000000000025 /* DiffView.swift */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -282,6 +306,9 @@
 				6A0000000000000000000018 /* SettingsManagerTests.swift */,
 				6A000000000000000000001E /* WorkspaceFileServiceTests.swift */,
 				6A000000000000000000001F /* ProjectTemplateTests.swift */,
+				6A0000000000000000000026 /* SyntaxHighlighterTests.swift */,
+				6A0000000000000000000027 /* FileTabManagerTests.swift */,
+				6A0000000000000000000028 /* DiffModelTests.swift */,
 			);
 			path = CodeForgeTests;
 			sourceTree = "<group>";
@@ -412,6 +439,12 @@
 				6B000000000000000000001B /* NewProjectView.swift in Sources */,
 				6B000000000000000000001C /* ProjectDetailView.swift in Sources */,
 				6B000000000000000000001D /* ImportProjectView.swift in Sources */,
+				6B0000000000000000000020 /* SyntaxHighlighter.swift in Sources */,
+				6B0000000000000000000021 /* EditorTab.swift in Sources */,
+				6B0000000000000000000022 /* DiffModel.swift in Sources */,
+				6B0000000000000000000023 /* CodeEditorView.swift in Sources */,
+				6B0000000000000000000024 /* ProjectFileTreeView.swift in Sources */,
+				6B0000000000000000000025 /* DiffView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +460,9 @@
 				6B0000000000000000000018 /* SettingsManagerTests.swift in Sources */,
 				6B000000000000000000001E /* WorkspaceFileServiceTests.swift in Sources */,
 				6B000000000000000000001F /* ProjectTemplateTests.swift in Sources */,
+				6B0000000000000000000026 /* SyntaxHighlighterTests.swift in Sources */,
+				6B0000000000000000000027 /* FileTabManagerTests.swift in Sources */,
+				6B0000000000000000000028 /* DiffModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

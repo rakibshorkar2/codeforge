@@ -10,15 +10,18 @@ final class AppEnvironment: ObservableObject {
     let projectManager: ProjectManagerProtocol
     let settingsManager: SettingsManagerProtocol
     let fileService: WorkspaceFileServiceProtocol
+    let fileTabManager: FileTabManager
 
     init(
         projectManager: ProjectManagerProtocol? = nil,
         settingsManager: SettingsManagerProtocol = SettingsManager(),
-        fileService: WorkspaceFileServiceProtocol = WorkspaceFileService()
+        fileService: WorkspaceFileServiceProtocol = WorkspaceFileService(),
+        fileTabManager: FileTabManager = FileTabManager()
     ) {
         self.fileService = fileService
         self.settingsManager = settingsManager
         self.projectManager = projectManager ?? ProjectManager(fileService: fileService)
+        self.fileTabManager = fileTabManager
     }
 
     func handleError(_ error: Error) {
