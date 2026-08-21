@@ -1,0 +1,653 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6B0000000000000000000001 /* CodeForgeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000001; };
+		6B0000000000000000000002 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000002; };
+		6B0000000000000000000003 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000003; };
+		6B0000000000000000000004 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000004; };
+		6B0000000000000000000005 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000005; };
+		6B0000000000000000000006 /* ProjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000006; };
+		6B0000000000000000000007 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000007; };
+		6B0000000000000000000008 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000008; };
+		6B0000000000000000000009 /* ProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000009; };
+		6B000000000000000000000A /* AgentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A000000000000000000000A; };
+		6B000000000000000000000B /* FilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A000000000000000000000B; };
+		6B000000000000000000000C /* BuildsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A000000000000000000000C; };
+		6B000000000000000000000D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A000000000000000000000D; };
+		6B000000000000000000000E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A000000000000000000000E; };
+		6B0000000000000000000013 /* AppEnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000013; };
+		6B0000000000000000000014 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000014; };
+		6B0000000000000000000015 /* NavigationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000015; };
+		6B0000000000000000000016 /* ErrorModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000016; };
+		6B0000000000000000000017 /* ProjectManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000017; };
+		6B0000000000000000000018 /* SettingsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000018; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6G0000000000000000000002 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6H0000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E0000000000000000000001;
+			remoteInfo = CodeForge;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6A0000000000000000000001 /* CodeForgeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeForgeApp.swift; sourceTree = "<group>"; };
+		6A0000000000000000000002 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		6A0000000000000000000003 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		6A0000000000000000000004 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		6A0000000000000000000005 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		6A0000000000000000000006 /* ProjectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectManager.swift; sourceTree = "<group>"; };
+		6A0000000000000000000007 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		6A0000000000000000000008 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		6A0000000000000000000009 /* ProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsView.swift; sourceTree = "<group>"; };
+		6A000000000000000000000A /* AgentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentView.swift; sourceTree = "<group>"; };
+		6A000000000000000000000B /* FilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesView.swift; sourceTree = "<group>"; };
+		6A000000000000000000000C /* BuildsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildsView.swift; sourceTree = "<group>"; };
+		6A000000000000000000000D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		6A000000000000000000000E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6A000000000000000000000F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A0000000000000000000010 /* CodeForge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CodeForge.entitlements; sourceTree = "<group>"; };
+		6A0000000000000000000011 /* CodeForge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeForge.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A0000000000000000000012 /* CodeForgeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodeForgeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A0000000000000000000013 /* AppEnvironmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironmentTests.swift; sourceTree = "<group>"; };
+		6A0000000000000000000014 /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
+		6A0000000000000000000015 /* NavigationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTests.swift; sourceTree = "<group>"; };
+		6A0000000000000000000016 /* ErrorModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModelTests.swift; sourceTree = "<group>"; };
+		6A0000000000000000000017 /* ProjectManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectManagerTests.swift; sourceTree = "<group>"; };
+		6A0000000000000000000018 /* SettingsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManagerTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6D0000000000000000000003 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D0000000000000000000006 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6C0000000000000000000001 /* root */ = {
+			isa = PBXGroup;
+			children = (
+				6C0000000000000000000002 /* CodeForge */,
+				6C0000000000000000000014 /* CodeForgeTests */,
+				6C0000000000000000000015 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6C0000000000000000000002 /* CodeForge */ = {
+			isa = PBXGroup;
+			children = (
+				6C0000000000000000000003 /* App */,
+				6C0000000000000000000004 /* Core */,
+				6C0000000000000000000009 /* Features */,
+				6C000000000000000000000F /* UI */,
+				6C0000000000000000000013 /* Resources */,
+				6A0000000000000000000010 /* CodeForge.entitlements */,
+			);
+			path = CodeForge;
+			sourceTree = "<group>";
+		};
+		6C0000000000000000000003 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				6A0000000000000000000001 /* CodeForgeApp.swift */,
+				6A0000000000000000000002 /* AppEnvironment.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		6C0000000000000000000004 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				6C0000000000000000000005 /* Models */,
+				6C0000000000000000000006 /* Services */,
+				6C0000000000000000000007 /* Utilities */,
+				6C0000000000000000000008 /* Extensions */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		6C0000000000000000000005 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6A0000000000000000000003 /* AppError.swift */,
+				6A0000000000000000000004 /* Tab.swift */,
+				6A0000000000000000000005 /* Project.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6C0000000000000000000006 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				6A0000000000000000000006 /* ProjectManager.swift */,
+				6A0000000000000000000007 /* SettingsManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		6C0000000000000000000007 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		6C0000000000000000000008 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6C0000000000000000000009 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				6C000000000000000000000A /* Projects */,
+				6C000000000000000000000B /* Agent */,
+				6C000000000000000000000C /* Editor */,
+				6C000000000000000000000D /* Builds */,
+				6C000000000000000000000E /* Settings */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		6C000000000000000000000A /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				6A0000000000000000000009 /* ProjectsView.swift */,
+			);
+			path = Projects;
+			sourceTree = "<group>";
+		};
+		6C000000000000000000000B /* Agent */ = {
+			isa = PBXGroup;
+			children = (
+				6A000000000000000000000A /* AgentView.swift */,
+			);
+			path = Agent;
+			sourceTree = "<group>";
+		};
+		6C000000000000000000000C /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				6A000000000000000000000B /* FilesView.swift */,
+			);
+			path = Editor;
+			sourceTree = "<group>";
+		};
+		6C000000000000000000000D /* Builds */ = {
+			isa = PBXGroup;
+			children = (
+				6A000000000000000000000C /* BuildsView.swift */,
+			);
+			path = Builds;
+			sourceTree = "<group>";
+		};
+		6C000000000000000000000E /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				6A000000000000000000000D /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		6C000000000000000000000F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				6C0000000000000000000010 /* Components */,
+				6C0000000000000000000011 /* Theme */,
+				6C0000000000000000000012 /* Navigation */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		6C0000000000000000000010 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		6C0000000000000000000011 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		6C0000000000000000000012 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				6A0000000000000000000008 /* MainTabView.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		6C0000000000000000000013 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6A000000000000000000000E /* Assets.xcassets */,
+				6A000000000000000000000F /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6C0000000000000000000014 /* CodeForgeTests */ = {
+			isa = PBXGroup;
+			children = (
+				6A0000000000000000000013 /* AppEnvironmentTests.swift */,
+				6A0000000000000000000014 /* ModelTests.swift */,
+				6A0000000000000000000015 /* NavigationTests.swift */,
+				6A0000000000000000000016 /* ErrorModelTests.swift */,
+				6A0000000000000000000017 /* ProjectManagerTests.swift */,
+				6A0000000000000000000018 /* SettingsManagerTests.swift */,
+			);
+			path = CodeForgeTests;
+			sourceTree = "<group>";
+		};
+		6C0000000000000000000015 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6A0000000000000000000011 /* CodeForge.app */,
+				6A0000000000000000000012 /* CodeForgeTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6E0000000000000000000001 /* CodeForge */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F0000000000000000000008 /* Build configuration list for PBXNativeTarget "CodeForge" */;
+			buildPhases = (
+				6D0000000000000000000001 /* Sources */,
+				6D0000000000000000000003 /* Frameworks */,
+				6D0000000000000000000002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CodeForge;
+			productName = CodeForge;
+			productReference = 6A0000000000000000000011 /* CodeForge.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6E0000000000000000000002 /* CodeForgeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F0000000000000000000009 /* Build configuration list for PBXNativeTarget "CodeForgeTests" */;
+			buildPhases = (
+				6D0000000000000000000004 /* Sources */,
+				6D0000000000000000000006 /* Frameworks */,
+				6D0000000000000000000005 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6G0000000000000000000001 /* PBXTargetDependency */,
+			);
+			name = CodeForgeTests;
+			productName = CodeForgeTests;
+			productReference = 6A0000000000000000000012 /* CodeForgeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6H0000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					6E0000000000000000000001 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					6E0000000000000000000002 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 6E0000000000000000000001;
+					};
+				};
+			};
+			buildConfigurationList = 6F0000000000000000000007 /* Build configuration list for PBXProject "CodeForge" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6C0000000000000000000001;
+			productRefGroup = 6C0000000000000000000015 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6E0000000000000000000001 /* CodeForge */,
+				6E0000000000000000000002 /* CodeForgeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6D0000000000000000000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B000000000000000000000E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D0000000000000000000005 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6D0000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B0000000000000000000001 /* CodeForgeApp.swift in Sources */,
+				6B0000000000000000000002 /* AppEnvironment.swift in Sources */,
+				6B0000000000000000000003 /* AppError.swift in Sources */,
+				6B0000000000000000000004 /* Tab.swift in Sources */,
+				6B0000000000000000000005 /* Project.swift in Sources */,
+				6B0000000000000000000006 /* ProjectManager.swift in Sources */,
+				6B0000000000000000000007 /* SettingsManager.swift in Sources */,
+				6B0000000000000000000008 /* MainTabView.swift in Sources */,
+				6B0000000000000000000009 /* ProjectsView.swift in Sources */,
+				6B000000000000000000000A /* AgentView.swift in Sources */,
+				6B000000000000000000000B /* FilesView.swift in Sources */,
+				6B000000000000000000000C /* BuildsView.swift in Sources */,
+				6B000000000000000000000D /* SettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D0000000000000000000004 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B0000000000000000000013 /* AppEnvironmentTests.swift in Sources */,
+				6B0000000000000000000014 /* ModelTests.swift in Sources */,
+				6B0000000000000000000015 /* NavigationTests.swift in Sources */,
+				6B0000000000000000000016 /* ErrorModelTests.swift in Sources */,
+				6B0000000000000000000017 /* ProjectManagerTests.swift in Sources */,
+				6B0000000000000000000018 /* SettingsManagerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6G0000000000000000000001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E0000000000000000000001 /* CodeForge */;
+			targetProxy = 6G0000000000000000000002 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		6F0000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6F0000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6F0000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CodeForge/CodeForge.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = CodeForge/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CodeForge;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codeforge.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6F0000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CodeForge/CodeForge.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = CodeForge/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CodeForge;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codeforge.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		6F0000000000000000000005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codeforge.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CodeForge.app/CodeForge";
+			};
+			name = Debug;
+		};
+		6F0000000000000000000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codeforge.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CodeForge.app/CodeForge";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6F0000000000000000000007 /* Build configuration list for PBXProject "CodeForge" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F0000000000000000000001 /* Debug */,
+				6F0000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6F0000000000000000000008 /* Build configuration list for PBXNativeTarget "CodeForge" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F0000000000000000000003 /* Debug */,
+				6F0000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6F0000000000000000000009 /* Build configuration list for PBXNativeTarget "CodeForgeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F0000000000000000000005 /* Debug */,
+				6F0000000000000000000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6H0000000000000000000001 /* Project object */;
+}
