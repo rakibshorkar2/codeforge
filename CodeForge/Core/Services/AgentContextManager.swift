@@ -14,7 +14,7 @@ struct AgentContextManager {
     func buildContext(
         userMessage: String,
         recentEdits: [String],
-        toolResults: [ToolResult],
+        referencedFiles: [String],
         projectStructure: String?
     ) -> [AIMessage] {
         var messages: [AIMessage] = []
@@ -24,16 +24,20 @@ struct AgentContextManager {
         messages.append(AIMessage(role: .system, content: systemPrompt))
         tokenEstimate += estimateTokens(systemPrompt)
 
-        if let structure = projectStructure, tokenEstimate + estimateTokens(structure) < maxTokens / 2 {
-            let projectContext = "Project structure:\n\(structure)"
-            messages.append(AIMessage(role: .system, content: projectContext))
-            tokenEstimate += estimateTokens(projectContext)
+        if let referenced = buildReferencedFilesContext(referencedFiles), tokenEstimate + estimateTokens(referenced) < maxTokens / 2 {
+            messages.append(AIMessage(role: .system, content: referenced))
+            tokenEstimate += estimateTokens(referenced)
         }
 
         if !recentEdits.isEmpty {
-            let editContext = "Recently modified files: \(recentEdits.joined(separator: ", "))"
+            let editContext = "Recently modified files: \(recentEdits.suffix(10).joined(separator: ", "))"
             messages.append(AIMessage(role: .system, content: editContext))
             tokenEstimate += estimateTokens(editContext)
+        }
+
+        if let structure = projectStructure, tokenEstimate + estimateTokens(structure) < maxTokens / 2 {
+            messages.append(AIMessage(role: .system, content: "Project structure:\n\(structure)"))
+            tokenEstimate += estimateTokens(structure)
         }
 
         messages.append(AIMessage(role: .user, content: userMessage))
@@ -42,35 +46,76 @@ struct AgentContextManager {
         return messages
     }
 
-    func appendToolResults(_ results: [ToolResult], to messages: [AIMessage]) -> [AIMessage] {
-        var updated = messages
-        for result in results {
-            let content = result.isError ? "Error: \(result.content)" : result.content
-            let truncated = truncateToTokenLimit(content, maxTokens: maxTokens / 4)
-            updated.append(AIMessage(role: .tool, content: truncated))
+    func buildReferencedFilesContext(_ paths: [String]) -> String? {
+        guard !paths.isEmpty else { return nil }
+        var parts: [String] = ["Referenced files:"]
+        for path in paths {
+            let fullPath = (workspace as NSString).appendingPathComponent(path)
+            if let content = try? String(contentsOfFile: fullPath, encoding: .utf8) {
+                let truncated = String(content.prefix(2000))
+                parts.append("--- \(path) ---\n\(truncated)\n---")
+            } else {
+                parts.append("--- \(path) --- (unreadable)")
+            }
         }
-        return updated
+        return parts.joined(separator: "\n")
     }
 
-    func appendAssistantMessage(_ message: AgentMessage, to messages: [AIMessage]) -> [AIMessage] {
-        var updated = messages
-        updated.append(AIMessage(role: .assistant, content: message.content))
-        return updated
+    func summarizeToolResults(_ results: [ToolResult], maxTokens: Int) -> String {
+        var summary: [String] = []
+        var estimate = 0
+        for result in results {
+            let text = result.isError ? "[ERROR] \(result.content)" : result.content
+            let truncated = truncateToTokenLimit(text, maxTokens: maxTokens / max(results.count, 1))
+            let lineEstimate = estimateTokens(truncated)
+            if estimate + lineEstimate > maxTokens { break }
+            summary.append(truncated)
+            estimate += lineEstimate
+        }
+        return summary.joined(separator: "\n\n")
     }
 
     func truncateConversation(_ messages: [AIMessage]) -> [AIMessage] {
         var result: [AIMessage] = []
         var totalTokens = 0
-        let limit = maxTokens
 
         for message in messages.reversed() {
             let tokens = estimateTokens(message.content)
-            if totalTokens + tokens > limit { break }
+            if totalTokens + tokens > maxTokens { break }
             result.insert(message, at: 0)
             totalTokens += tokens
         }
 
         return result
+    }
+
+    func estimateTokens(_ text: String) -> Int {
+        text.count / 4
+    }
+
+    func getProjectStructure(maxDepth: Int = 3) -> String? {
+        var lines: [String] = []
+        buildTree(path: workspace, prefix: "", depth: 0, maxDepth: maxDepth, lines: &lines)
+        return lines.isEmpty ? nil : lines.joined(separator: "\n")
+    }
+
+    func extractReferencedFiles(from message: String) -> [String] {
+        var files: [String] = []
+        let patterns = [
+            #"(?:file|path|read|write|edit|modify):\s*[`"']?([^\s`"']+\.\w+)[`"']?"#,
+            #"[`"']([^\s`"']+\.\w+)[`"']?"#,
+        ]
+        for pattern in patterns {
+            if let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) {
+                let matches = regex.matches(in: message, range: NSRange(message.startIndex..., in: message))
+                for match in matches {
+                    if let range = Range(match.range(at: 1), in: message) {
+                        files.append(String(message[range]))
+                    }
+                }
+            }
+        }
+        return Array(Set(files))
     }
 
     private func buildSystemPrompt() -> String {
@@ -92,28 +137,17 @@ struct AgentContextManager {
         """
     }
 
-    func estimateTokens(_ text: String) -> Int {
-        text.count / 4
-    }
-
     private func truncateToTokenLimit(_ text: String, maxTokens: Int) -> String {
         let maxChars = maxTokens * 4
         if text.count <= maxChars { return text }
-        let truncated = String(text.prefix(maxChars))
-        return truncated + "\n... (truncated)"
-    }
-
-    func getProjectStructure(maxDepth: Int = 3) -> String? {
-        var lines: [String] = []
-        buildTree(path: workspace, prefix: "", depth: 0, maxDepth: maxDepth, lines: &lines)
-        return lines.isEmpty ? nil : lines.joined(separator: "\n")
+        return String(text.prefix(maxChars)) + "\n... (truncated)"
     }
 
     private func buildTree(path: String, prefix: String, depth: Int, maxDepth: Int, lines: inout [String]) {
         guard depth < maxDepth else { return }
         guard let items = try? fileManager.contentsOfDirectory(atPath: path) else { return }
-        let skipped: Set<String> = [".git", "node_modules", ".build", "DerivedData", ".DS_Store"]
-        let sorted = items.filter { !skipped.contains($0) }.sorted()
+        let skipped: Set<String> = [".git", "node_modules", ".build", "DerivedData", ".DS_Store", ".swiftpm", "xcuserdata"]
+        let sorted = items.filter { !skipped.contains($0) && !$0.hasPrefix(".") }.sorted()
 
         for (index, item) in sorted.enumerated() {
             let isLast = index == sorted.count - 1

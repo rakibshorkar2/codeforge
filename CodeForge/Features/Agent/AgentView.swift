@@ -5,6 +5,10 @@ struct AgentView: View {
     @State private var messageText = ""
     @State private var selectedProject: Project?
     @State private var showProjectPicker = false
+    @State private var showSettings = false
+    @State private var showSessionHistory = false
+    @State private var showChangeReview = false
+    @State private var attachedFiles: [String] = []
 
     private var session: AgentSession? {
         appEnvironment.agentManager.currentSession
@@ -12,13 +16,9 @@ struct AgentView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
+            Group {
                 if session != nil {
-                    chatHeader
-                    Divider()
-                    chatMessages
-                    Divider()
-                    chatInput
+                    chatWorkspace
                 } else {
                     projectSelectionView
                 }
@@ -26,42 +26,90 @@ struct AgentView: View {
             .navigationTitle("Agent")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                if session != nil {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Menu {
-                            modeMenu
-                            Divider()
-                            Button("End Session", role: .destructive) {
-                                appEnvironment.agentManager.stopSession()
+                ToolbarItem(placement: .topBarTrailing) {
+                    HStack(spacing: 16) {
+                        if session != nil {
+                            Button(action: { showSessionHistory = true }) {
+                                Image(systemName: "clock.arrow.circlepath")
                             }
-                        } label: {
-                            Image(systemName: "gearshape")
+                            Button(action: { showSettings = true }) {
+                                Image(systemName: "gearshape")
+                            }
                         }
                     }
                 }
             }
+            .sheet(isPresented: $showProjectPicker) {
+                AgentProjectPicker(selectedProject: $selectedProject) { project in
+                    startSession(for: project)
+                    showProjectPicker = false
+                }
+            }
+            .sheet(isPresented: $showSettings) {
+                AgentSettingsSheet(config: appEnvironment.agentManager.config, permissionManager: appEnvironment.agentManager.permissionManager)
+            }
+            .sheet(isPresented: $showSessionHistory) {
+                AgentSessionHistoryView(projectID: session?.projectID ?? "") { persisted in
+                    appEnvironment.agentManager.resumeSession(persisted, requestService: appEnvironment.aiRequestService)
+                    showSessionHistory = false
+                } onDelete: { id in
+                    appEnvironment.agentManager.deleteSession(id: id)
+                }
+            }
+            .sheet(isPresented: $showChangeReview) {
+                AgentChangeReviewView(tracker: appEnvironment.agentManager.changeTracker, workspace: session?.workspace ?? "")
+            }
+        }
+    }
+
+    private var chatWorkspace: some View {
+        VStack(spacing: 0) {
+            chatHeader
+            Divider()
+            chatMessages
+            if let error = appEnvironment.agentManager.lastError {
+                errorBanner(error)
+            }
+            Divider()
+            chatInput
         }
     }
 
     private var chatHeader: some View {
-        HStack {
+        HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 2) {
                 Text(session?.projectName ?? "")
-                    .font(.headline)
-                Text("Mode: \(appEnvironment.agentManager.config.mode.rawValue)")
-                    .font(.caption)
+                    .font(.subheadline.weight(.semibold))
+                Text(config.mode.rawValue)
+                    .font(.caption2)
                     .foregroundStyle(.secondary)
             }
             Spacer()
+            if !appEnvironment.agentManager.statusMessage.isEmpty {
+                Text(appEnvironment.agentManager.statusMessage)
+                    .font(.caption2)
+                    .foregroundStyle(.purple)
+                    .lineLimit(1)
+            }
             if appEnvironment.agentManager.isProcessing {
                 ProgressView()
-                    .scaleEffect(0.8)
+                    .scaleEffect(0.7)
             }
-            Text("\(session?.iterationCount ?? 0)/\(appEnvironment.agentManager.config.maxIterations)")
-                .font(.caption2)
-                .foregroundStyle(.secondary)
+            if !appEnvironment.agentManager.changeTracker.pendingChanges.isEmpty {
+                Button(action: { showChangeReview = true }) {
+                    HStack(spacing: 4) {
+                        Image(systemName: "doc.diff")
+                        Text("\(appEnvironment.agentManager.changeTracker.pendingChanges.count)")
+                    }
+                    .font(.caption2)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(.orange.opacity(0.15))
+                    .clipShape(Capsule())
+                }
+            }
         }
-        .padding(.horizontal)
+        .padding(.horizontal, 16)
         .padding(.vertical, 8)
         .background(.ultraThinMaterial)
     }
@@ -69,19 +117,31 @@ struct AgentView: View {
     private var chatMessages: some View {
         ScrollViewReader { proxy in
             ScrollView {
-                LazyVStack(alignment: .leading, spacing: 12) {
+                LazyVStack(alignment: .leading, spacing: 16) {
                     ForEach(session?.messages ?? []) { message in
                         messageRow(message)
                             .id(message.id)
+                            .transition(.opacity.combined(with: .move(edge: .bottom)))
+                    }
+
+                    if !appEnvironment.agentManager.streamingContent.isEmpty && (session?.isRunning ?? false) {
+                        streamingRow
                     }
                 }
-                .padding()
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
             }
+            .scrollDismissesKeyboard(.interactively)
             .onChange(of: session?.messages.count) { _, _ in
-                if let lastMessage = session?.messages.last {
-                    withAnimation {
-                        proxy.scrollTo(lastMessage.id, anchor: .bottom)
+                withAnimation(.easeOut(duration: 0.3)) {
+                    if let last = session?.messages.last {
+                        proxy.scrollTo(last.id, anchor: .bottom)
                     }
+                }
+            }
+            .onChange(of: appEnvironment.agentManager.streamingContent) { _, _ in
+                withAnimation(.easeOut(duration: 0.1)) {
+                    proxy.scrollTo("streaming", anchor: .bottom)
                 }
             }
         }
@@ -89,114 +149,181 @@ struct AgentView: View {
 
     private func messageRow(_ message: AgentMessage) -> some View {
         HStack(alignment: .top, spacing: 12) {
-            if message.role == .user {
-                Spacer(minLength: 40)
-            }
+            if message.role == .user { Spacer(minLength: 48) }
 
-            VStack(alignment: message.role == .user ? .trailing : .leading, spacing: 4) {
+            VStack(alignment: message.role == .user ? .trailing : .leading, spacing: 6) {
                 HStack(spacing: 6) {
                     if message.role == .assistant {
                         Image(systemName: "brain.head.profile")
-                            .font(.caption)
+                            .font(.caption2)
                             .foregroundStyle(.purple)
                     }
-                    Text(message.role == .user ? "You" : "Agent")
-                        .font(.caption)
+                    Text(message.role == .user ? "You" : message.role == .tool ? "Tool" : "Agent")
+                        .font(.caption2.weight(.medium))
                         .foregroundStyle(.secondary)
                     if message.role == .tool {
-                        Text("Tool Result")
+                        Image(systemName: message.content.contains("Error") ? "xmark.circle.fill" : "checkmark.circle.fill")
                             .font(.caption2)
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2)
-                            .background(.orange.opacity(0.15))
-                            .clipShape(Capsule())
+                            .foregroundStyle(message.content.contains("Error") ? .red : .green)
                     }
                 }
 
-                Text(message.content)
-                    .font(.subheadline)
-                    .padding(10)
-                    .background(message.role == .user ? Color.accentColor.opacity(0.15) : Color.gray.opacity(0.1))
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                if message.role == .tool {
+                    toolResultCard(message)
+                } else {
+                    Text(message.content)
+                        .font(.subheadline)
+                        .padding(12)
+                        .background(message.role == .user ? Color.accentColor.opacity(0.12) : Color.gray.opacity(0.08))
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                }
             }
 
-            if message.role != .user {
-                Spacer(minLength: 40)
-            }
+            if message.role != .user { Spacer(minLength: 48) }
         }
+    }
+
+    private func toolResultCard(_ message: AgentMessage) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            let isError = message.content.contains("Error")
+            Text(isError ? "Failed" : "Completed")
+                .font(.caption2.weight(.medium))
+                .foregroundStyle(isError ? .red : .green)
+            Text(String(message.content.prefix(200)))
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .lineLimit(4)
+        }
+        .padding(10)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(isError ? Color.red.opacity(0.05) : Color.green.opacity(0.05))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(isError ? Color.red.opacity(0.2) : Color.green.opacity(0.2), lineWidth: 1)
+        )
+    }
+
+    private var streamingRow: some View {
+        HStack(alignment: .top, spacing: 12) {
+            Spacer(minLength: 48)
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(spacing: 6) {
+                    Image(systemName: "brain.head.profile")
+                        .font(.caption2)
+                        .foregroundStyle(.purple)
+                    Text("Agent")
+                        .font(.caption2.weight(.medium))
+                        .foregroundStyle(.secondary)
+                    ProgressView()
+                        .scaleEffect(0.5)
+                }
+                Text(appEnvironment.agentManager.streamingContent)
+                    .font(.subheadline)
+                    .padding(12)
+                    .background(Color.purple.opacity(0.06))
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+            }
+            Spacer(minLength: 48)
+        }
+        .id("streaming")
+    }
+
+    private func errorBanner(_ error: AgentError) -> some View {
+        HStack(spacing: 12) {
+            Image(systemName: "exclamationmark.triangle.fill")
+                .foregroundStyle(.orange)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(error.message)
+                    .font(.caption)
+                    .lineLimit(2)
+                HStack(spacing: 12) {
+                    Button("Retry") {
+                        Task { await appEnvironment.agentManager.retryLastMessage() }
+                    }
+                    .font(.caption.weight(.medium))
+                    Button("Dismiss") {
+                        appEnvironment.agentManager.lastError = nil
+                    }
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                }
+            }
+            Spacer()
+        }
+        .padding(12)
+        .background(Color.orange.opacity(0.08))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
     }
 
     private var chatInput: some View {
         HStack(spacing: 12) {
-            TextField("Ask the agent...", text: $messageText, axis: .vertical)
+            if !attachedFiles.isEmpty {
+                Button(action: { attachedFiles.removeAll() }) {
+                    HStack(spacing: 4) {
+                        Image(systemName: "paperclip")
+                        Text("\(attachedFiles.count)")
+                    }
+                    .font(.caption)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(Color.accentColor.opacity(0.1))
+                    .clipShape(Capsule())
+                }
+            }
+
+            TextField("Ask anything...", text: $messageText, axis: .vertical)
                 .textFieldStyle(.plain)
                 .lineLimit(1...5)
-                .onSubmit { sendMessage() }
+                .font(.subheadline)
 
-            Button(action: sendMessage) {
-                Image(systemName: "arrow.up.circle.fill")
-                    .font(.title2)
+            if appEnvironment.agentManager.isProcessing {
+                Button(action: { appEnvironment.agentManager.cancel() }) {
+                    Image(systemName: "stop.circle.fill")
+                        .font(.title3)
+                        .foregroundStyle(.red)
+                }
+            } else {
+                Button(action: sendMessage) {
+                    Image(systemName: "arrow.up.circle.fill")
+                        .font(.title3)
+                }
+                .disabled(messageText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
-            .disabled(messageText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || appEnvironment.agentManager.isProcessing)
         }
-        .padding(.horizontal)
+        .padding(.horizontal, 16)
         .padding(.vertical, 10)
         .background(.ultraThinMaterial)
     }
 
     private var projectSelectionView: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 24) {
             Image(systemName: "brain.head.profile")
-                .font(.system(size: 60))
+                .font(.system(size: 56))
                 .foregroundStyle(.purple)
 
-            Text("AI Coding Agent")
-                .font(.title2.bold())
+            VStack(spacing: 8) {
+                Text("AI Coding Agent")
+                    .font(.title3.bold())
+                Text("Select a project to start an AI coding session.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+            }
 
-            Text("Select a project to start an AI coding session.")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-
-            Button("Select Project") {
-                showProjectPicker = true
+            Button(action: { showProjectPicker = true }) {
+                Label("Select Project", systemImage: "folder.badge.questionmark")
+                    .font(.subheadline.weight(.medium))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
             }
             .buttonStyle(.borderedProminent)
             .tint(.purple)
+            .padding(.horizontal, 40)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .sheet(isPresented: $showProjectPicker) {
-            AgentProjectPicker(selectedProject: $selectedProject) { project in
-                startSession(for: project)
-                showProjectPicker = false
-            }
-        }
-    }
-
-    private var modeMenu: some View {
-        Menu("Mode") {
-            ForEach(AgentMode.allCases, id: \.self) { mode in
-                Button(action: {
-                    appEnvironment.agentManager.config.mode = mode
-                }) {
-                    HStack {
-                        Text(mode.rawValue)
-                        if appEnvironment.agentManager.config.mode == mode {
-                            Image(systemName: "checkmark")
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private func sendMessage() {
-        let text = messageText.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !text.isEmpty, let session = session else { return }
-        messageText = ""
-        Task {
-            await appEnvironment.agentManager.processMessage(text)
-        }
     }
 
     private func startSession(for project: Project) {
@@ -208,6 +335,21 @@ struct AgentView: View {
             requestService: appEnvironment.aiRequestService
         )
     }
+
+    private func sendMessage() {
+        let text = messageText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !text.isEmpty, session != nil else { return }
+        messageText = ""
+        let finalMessage = attachedFiles.isEmpty ? text : "\(text)\n\nAttached files: \(attachedFiles.joined(separator: ", "))"
+        attachedFiles.removeAll()
+        Task {
+            await appEnvironment.agentManager.processMessage(finalMessage)
+        }
+    }
+
+    private var config: AgentConfig {
+        appEnvironment.agentManager.config
+    }
 }
 
 struct AgentProjectPicker: View {
@@ -218,20 +360,36 @@ struct AgentProjectPicker: View {
 
     var body: some View {
         NavigationStack {
-            List(appEnvironment.projectManager.projects) { project in
-                Button(action: {
-                    selectedProject = project
-                    onSelect(project)
-                }) {
-                    HStack {
-                        Image(systemName: project.type.icon)
-                            .foregroundStyle(.purple)
-                        VStack(alignment: .leading) {
-                            Text(project.name)
-                                .font(.body)
-                            Text(project.type.displayName)
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
+            List {
+                if appEnvironment.projectManager.projects.isEmpty {
+                    ContentUnavailableView(
+                        "No Projects",
+                        systemImage: "folder.badge.plus",
+                        description: Text("Create a project first to use the AI agent.")
+                    )
+                } else {
+                    ForEach(appEnvironment.projectManager.projects) { project in
+                        Button(action: {
+                            selectedProject = project
+                            onSelect(project)
+                        }) {
+                            HStack(spacing: 12) {
+                                Image(systemName: project.type.icon)
+                                    .font(.title3)
+                                    .foregroundStyle(.purple)
+                                    .frame(width: 32)
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(project.name)
+                                        .font(.body)
+                                    Text(project.type.displayName)
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                }
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .font(.caption)
+                                    .foregroundStyle(.tertiary)
+                            }
                         }
                     }
                 }

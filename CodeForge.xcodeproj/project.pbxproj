@@ -64,6 +64,14 @@
 		6B000000000000000000003B /* AgentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A000000000000000000003B; };
 		6B000000000000000000003C /* AgentInfrastructureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A000000000000000000003C; };
 		6B000000000000000000003D /* AgentToolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A000000000000000000003D; };
+		6B000000000000000000003E /* AgentChangeReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A000000000000000000003E; };
+		6B000000000000000000003F /* AgentSettingsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A000000000000000000003F; };
+		6B0000000000000000000040 /* AgentSessionHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000040; };
+		6B0000000000000000000041 /* AgentPermissionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000041; };
+		6B0000000000000000000042 /* AgentActivityTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000042; };
+		6B0000000000000000000043 /* AgentSessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000043; };
+		6B0000000000000000000044 /* AgentChangeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000044; };
+		6B0000000000000000000045 /* AgentPhase6Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000045; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +146,14 @@
 		6A000000000000000000003B /* AgentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentManager.swift; sourceTree = "<group>"; };
 		6A000000000000000000003C /* AgentInfrastructureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentInfrastructureTests.swift; sourceTree = "<group>"; };
 		6A000000000000000000003D /* AgentToolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentToolTests.swift; sourceTree = "<group>"; };
+		6A000000000000000000003E /* AgentChangeReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentChangeReviewView.swift; sourceTree = "<group>"; };
+		6A000000000000000000003F /* AgentSettingsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentSettingsSheet.swift; sourceTree = "<group>"; };
+		6A0000000000000000000040 /* AgentSessionHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentSessionHistoryView.swift; sourceTree = "<group>"; };
+		6A0000000000000000000041 /* AgentPermissionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentPermissionSheet.swift; sourceTree = "<group>"; };
+		6A0000000000000000000042 /* AgentActivityTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentActivityTimelineView.swift; sourceTree = "<group>"; };
+		6A0000000000000000000043 /* AgentSessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentSessionStore.swift; sourceTree = "<group>"; };
+		6A0000000000000000000044 /* AgentChangeTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentChangeTracker.swift; sourceTree = "<group>"; };
+		6A0000000000000000000045 /* AgentPhase6Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentPhase6Tests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +249,8 @@
 				6A0000000000000000000039 /* AgentContextManager.swift */,
 				6A000000000000000000003A /* AgentSession.swift */,
 				6A000000000000000000003B /* AgentManager.swift */,
+				6A0000000000000000000043 /* AgentSessionStore.swift */,
+				6A0000000000000000000044 /* AgentChangeTracker.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -280,6 +298,11 @@
 			isa = PBXGroup;
 			children = (
 				6A000000000000000000000A /* AgentView.swift */,
+				6A000000000000000000003E /* AgentChangeReviewView.swift */,
+				6A000000000000000000003F /* AgentSettingsSheet.swift */,
+				6A0000000000000000000040 /* AgentSessionHistoryView.swift */,
+				6A0000000000000000000041 /* AgentPermissionSheet.swift */,
+				6A0000000000000000000042 /* AgentActivityTimelineView.swift */,
 			);
 			path = Agent;
 			sourceTree = "<group>";
@@ -372,6 +395,7 @@
 				6A0000000000000000000031 /* AIProviderManagerTests.swift */,
 				6A000000000000000000003C /* AgentInfrastructureTests.swift */,
 				6A000000000000000000003D /* AgentToolTests.swift */,
+				6A0000000000000000000045 /* AgentPhase6Tests.swift */,
 			);
 			path = CodeForgeTests;
 			sourceTree = "<group>";
@@ -524,6 +548,13 @@
 				6B0000000000000000000039 /* AgentContextManager.swift in Sources */,
 				6B000000000000000000003A /* AgentSession.swift in Sources */,
 				6B000000000000000000003B /* AgentManager.swift in Sources */,
+				6B000000000000000000003E /* AgentChangeReviewView.swift in Sources */,
+				6B000000000000000000003F /* AgentSettingsSheet.swift in Sources */,
+				6B0000000000000000000040 /* AgentSessionHistoryView.swift in Sources */,
+				6B0000000000000000000041 /* AgentPermissionSheet.swift in Sources */,
+				6B0000000000000000000042 /* AgentActivityTimelineView.swift in Sources */,
+				6B0000000000000000000043 /* AgentSessionStore.swift in Sources */,
+				6B0000000000000000000044 /* AgentChangeTracker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +578,7 @@
 				6B0000000000000000000031 /* AIProviderManagerTests.swift in Sources */,
 				6B000000000000000000003C /* AgentInfrastructureTests.swift in Sources */,
 				6B000000000000000000003D /* AgentToolTests.swift in Sources */,
+				6B0000000000000000000045 /* AgentPhase6Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,6 +1,6 @@
 import Foundation
 
-struct EditFileTool: BaseFileTool, AgentTool {
+final class EditFileTool: BaseFileTool, AgentTool {
     let name = "edit_file"
     let description = "Edit a file using search/replace or line-based patches. Returns an error if the patch cannot be safely applied."
     let requiredPermission = PermissionLevel.write
@@ -53,6 +53,12 @@ struct EditFileTool: BaseFileTool, AgentTool {
         try newContent.write(toFile: resolved, atomically: true, encoding: .utf8)
         log(toolName: name, path: path, success: true)
         return "File edited successfully: \(path)"
+    }
+
+    func computeDiff(path: String, workspace: String) -> (old: String, new: String)? {
+        let resolved = (workspace as NSString).appendingPathComponent(path)
+        guard let newContent = try? String(contentsOfFile: resolved, encoding: .utf8) else { return nil }
+        return (old: "", new: newContent)
     }
 
     private func applySearchReplace(original: String, oldText: String, newText: String, path: String) throws -> String {

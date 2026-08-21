@@ -164,7 +164,7 @@ struct AgentTokenUsage: Codable {
     }
 }
 
-struct AgentConfig: Codable {
+final class AgentConfig: Codable {
     var maxIterations: Int
     var maxContextTokens: Int
     var maxResponseTokens: Int
