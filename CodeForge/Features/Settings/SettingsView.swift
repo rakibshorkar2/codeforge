@@ -33,6 +33,16 @@ struct SettingsView: View {
                         }
                 }
 
+                Section("AI Providers") {
+                    NavigationLink(destination: AIProvidersSettingsView()) {
+                        HStack {
+                            Image(systemName: "brain.head.profile")
+                                .foregroundStyle(.purple)
+                            Text("AI Providers")
+                        }
+                    }
+                }
+
                 Section("About") {
                     HStack {
                         Text("Version")
