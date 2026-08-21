@@ -13,13 +13,15 @@ final class AppEnvironment: ObservableObject {
     let fileTabManager: FileTabManager
     let aiProviderManager: AIProviderManager
     let aiRequestService: AIRequestService
+    let agentManager: AgentManager
 
     init(
         projectManager: ProjectManagerProtocol? = nil,
         settingsManager: SettingsManagerProtocol = SettingsManager(),
         fileService: WorkspaceFileServiceProtocol = WorkspaceFileService(),
         fileTabManager: FileTabManager = FileTabManager(),
-        aiProviderManager: AIProviderManager = AIProviderManager()
+        aiProviderManager: AIProviderManager = AIProviderManager(),
+        agentManager: AgentManager = AgentManager()
     ) {
         self.fileService = fileService
         self.settingsManager = settingsManager
@@ -27,6 +29,7 @@ final class AppEnvironment: ObservableObject {
         self.fileTabManager = fileTabManager
         self.aiProviderManager = aiProviderManager
         self.aiRequestService = AIRequestService(providerManager: aiProviderManager)
+        self.agentManager = agentManager
     }
 
     func handleError(_ error: Error) {
