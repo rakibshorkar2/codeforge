@@ -32,7 +32,8 @@ final class ErrorModelTests: XCTestCase {
             .filesystem(.permissionDenied),
             .filesystem(.readFailed),
             .filesystem(.writeFailed),
-            .filesystem(.invalidPath)
+            .filesystem(.invalidPath),
+            .filesystem(.custom("Custom error"))
         ]
         for error in errors {
             XCTAssertNotNil(error.localizedDescription)
@@ -84,5 +85,28 @@ final class ErrorModelTests: XCTestCase {
         let error1 = AppError.network(.noConnection)
         let error2 = AppError.network(.noConnection)
         XCTAssertEqual(error1.id, error2.id)
+    }
+
+    func testWorkspaceFileErrorDescriptions() {
+        let errors: [WorkspaceFileError] = [
+            .directoryCreationFailed("/path"),
+            .fileCreationFailed("/path"),
+            .readFailed("/path"),
+            .writeFailed("/path"),
+            .deleteFailed("/path"),
+            .moveFailed("/path"),
+            .copyFailed("/path"),
+            .renameFailed("/path"),
+            .pathTraversalDetected,
+            .itemNotFound("/path"),
+            .notADirectory("/path"),
+            .notAFile("/path"),
+            .zipExtractionFailed("reason"),
+            .zipCreationFailed("reason")
+        ]
+        for error in errors {
+            XCTAssertNotNil(error.localizedDescription)
+            XCTAssertFalse(error.localizedDescription.isEmpty)
+        }
     }
 }

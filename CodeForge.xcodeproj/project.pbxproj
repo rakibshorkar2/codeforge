@@ -27,6 +27,13 @@
 		6B0000000000000000000016 /* ErrorModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000016; };
 		6B0000000000000000000017 /* ProjectManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000017; };
 		6B0000000000000000000018 /* SettingsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000018; };
+		6B0000000000000000000019 /* WorkspaceFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0000000000000000000019; };
+		6B000000000000000000001A /* ProjectTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A000000000000000000001A; };
+		6B000000000000000000001B /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A000000000000000000001B; };
+		6B000000000000000000001C /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A000000000000000000001C; };
+		6B000000000000000000001D /* ImportProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A000000000000000000001D; };
+		6B000000000000000000001E /* WorkspaceFileServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A000000000000000000001E; };
+		6B000000000000000000001F /* ProjectTemplateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A000000000000000000001F; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +71,13 @@
 		6A0000000000000000000016 /* ErrorModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModelTests.swift; sourceTree = "<group>"; };
 		6A0000000000000000000017 /* ProjectManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectManagerTests.swift; sourceTree = "<group>"; };
 		6A0000000000000000000018 /* SettingsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManagerTests.swift; sourceTree = "<group>"; };
+		6A0000000000000000000019 /* WorkspaceFileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceFileService.swift; sourceTree = "<group>"; };
+		6A000000000000000000001A /* ProjectTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTemplate.swift; sourceTree = "<group>"; };
+		6A000000000000000000001B /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
+		6A000000000000000000001C /* ProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
+		6A000000000000000000001D /* ImportProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportProjectView.swift; sourceTree = "<group>"; };
+		6A000000000000000000001E /* WorkspaceFileServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceFileServiceTests.swift; sourceTree = "<group>"; };
+		6A000000000000000000001F /* ProjectTemplateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTemplateTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +155,7 @@
 			children = (
 				6A0000000000000000000006 /* ProjectManager.swift */,
 				6A0000000000000000000007 /* SettingsManager.swift */,
+				6A0000000000000000000019 /* WorkspaceFileService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -148,6 +163,7 @@
 		6C0000000000000000000007 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				6A000000000000000000001A /* ProjectTemplate.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -175,6 +191,9 @@
 			isa = PBXGroup;
 			children = (
 				6A0000000000000000000009 /* ProjectsView.swift */,
+				6A000000000000000000001B /* NewProjectView.swift */,
+				6A000000000000000000001C /* ProjectDetailView.swift */,
+				6A000000000000000000001D /* ImportProjectView.swift */,
 			);
 			path = Projects;
 			sourceTree = "<group>";
@@ -261,6 +280,8 @@
 				6A0000000000000000000016 /* ErrorModelTests.swift */,
 				6A0000000000000000000017 /* ProjectManagerTests.swift */,
 				6A0000000000000000000018 /* SettingsManagerTests.swift */,
+				6A000000000000000000001E /* WorkspaceFileServiceTests.swift */,
+				6A000000000000000000001F /* ProjectTemplateTests.swift */,
 			);
 			path = CodeForgeTests;
 			sourceTree = "<group>";
@@ -386,6 +407,11 @@
 				6B000000000000000000000B /* FilesView.swift in Sources */,
 				6B000000000000000000000C /* BuildsView.swift in Sources */,
 				6B000000000000000000000D /* SettingsView.swift in Sources */,
+				6B0000000000000000000019 /* WorkspaceFileService.swift in Sources */,
+				6B000000000000000000001A /* ProjectTemplate.swift in Sources */,
+				6B000000000000000000001B /* NewProjectView.swift in Sources */,
+				6B000000000000000000001C /* ProjectDetailView.swift in Sources */,
+				6B000000000000000000001D /* ImportProjectView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +425,8 @@
 				6B0000000000000000000016 /* ErrorModelTests.swift in Sources */,
 				6B0000000000000000000017 /* ProjectManagerTests.swift in Sources */,
 				6B0000000000000000000018 /* SettingsManagerTests.swift in Sources */,
+				6B000000000000000000001E /* WorkspaceFileServiceTests.swift in Sources */,
+				6B000000000000000000001F /* ProjectTemplateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

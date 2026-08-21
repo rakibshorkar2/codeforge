@@ -35,6 +35,7 @@ enum FileError: Error, Equatable {
     case readFailed
     case writeFailed
     case invalidPath
+    case custom(String)
 }
 
 enum AIError: Error, Equatable {
@@ -81,6 +82,7 @@ extension AppError {
             case .readFailed: return "Failed to read file"
             case .writeFailed: return "Failed to write file"
             case .invalidPath: return "Invalid file path"
+            case .custom(let message): return message
             }
         case .ai(let error):
             switch error {
